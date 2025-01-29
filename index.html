@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color:pink
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .big {
+            transform: scale(1.2); /* Increase size */
+        }
+        .small {
+            transform: scale(0.8); /* Decrease size */
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hi Aimee, <br>will you be my valentine?👉👈</h1>
+    <button id="yesBtn" onclick="handleResponse('yes')">YES!!</button>
+    <button id="noBtn" onclick="handleResponse('no')">No :(</button>
+    <div id="message"></div> <!-- Message display area -->
+
+    <script>
+        let noButtonScale = 1; // Initial scale for the No button
+        let yesButtonScale = 1; // Initial scale for the Yes button
+
+        function handleResponse(answer) {
+            const yesButton = document.getElementById("yesBtn");
+            const noButton = document.getElementById("noBtn");
+            const messageDiv = document.getElementById("message"); // Get message display element
+            
+            if (answer === 'yes') {
+                messageDiv.textContent = "You answered Yes! Redirecting..."; // Update message
+                setTimeout(() => {
+                    window.location.href = 'success.html'; // Redirect to success page
+                }, 2000); // Wait 2 seconds before redirecting
+                resetButtons(); // Reset buttons if yes is clicked
+            } else {
+                messageDiv.textContent = "I think you meant to answer yes!"; // Update message
+                yesButtonScale *= 1.2; // Increase scale for Yes button
+                yesButton.style.transform = `scale(${yesButtonScale})`; // Apply new scale
+                noButtonScale *= 0.8; // Reduce scale for No button
+                noButton.style.transform = `scale(${noButtonScale})`; // Apply new scale
+            }
+        }
+
+        function resetButtons() {
+            const yesButton = document.getElementById("yesBtn");
+            const noButton = document.getElementById("noBtn");
+            yesButtonScale = 1; // Reset Yes button scale
+            noButtonScale = 1; // Reset No button scale
+            yesButton.style.transform = `scale(${yesButtonScale})`; // Reset Yes button scale
+            noButton.style.transform = `scale(${noButtonScale})`; // Reset No button scale
+            document.getElementById("message").textContent = ""; // Clear message on reset
+        }
+    </script>
+</body>
+</html>
